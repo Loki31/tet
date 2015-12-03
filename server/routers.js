@@ -1,5 +1,17 @@
-Picker.route('/pdf/generate', function(params, req, res, next) {
+Meteor.startup(function() {
+  var bodyParser = Meteor.npmRequire( 'body-parser' );
+
+// Define our middleware using the Picker.middleware() method.
+Picker.middleware( bodyParser.json() );
+Picker.middleware( bodyParser.urlencoded( { extended: false } ) );
+
+});
+
+
+
+Picker.route('/pdf/generate/:hid', function(params, req, res, next) {
     console.log('/download route!');
+    console.log( req.body );
     var Future, Webshot, fileName, fs, fut, html, options, user;
     fs = Meteor.npmRequire('fs');
     Future = Npm.require('fibers/future');
@@ -8,7 +20,7 @@ Picker.route('/pdf/generate', function(params, req, res, next) {
     fut = new Future();
     SSR.compileTemplate('template', Assets.getText('userPdf.html'));
     html = SSR.render('template', {
-      user: 'Lalalalla'
+      user: 'lala'
     });
     options = {
 
@@ -40,3 +52,4 @@ Picker.route('/pdf/generate', function(params, req, res, next) {
     //res.end(fut.wait());
 
 });
+

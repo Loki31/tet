@@ -14,12 +14,16 @@ if (Meteor.isClient) {
       Meteor.setTimeout(function() {
         Router.go('/aboutPage');
       }, 5000);
+    },
+    'click .download': function (event, template) {
+        event.preventDefault();
+        HTTP.call( 'GET', '/pdf/generate/12503', {}, function( error, response ) {
+  if ( error ) {
+    console.log( error );
+  } else {
+    console.log( response );
+  }
+});
     }
-  });
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
   });
 }
