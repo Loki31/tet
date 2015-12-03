@@ -17,13 +17,15 @@ if (Meteor.isClient) {
     },
     'click .download': function (event, template) {
         event.preventDefault();
-        HTTP.call( 'GET', '/pdf/generate/12503', {}, function( error, response ) {
-  if ( error ) {
-    console.log( error );
-  } else {
-    console.log( response );
-  }
-});
+        var win = window.open('pdf/generate/12345');
+        win.focus();
+        // HTTP.call('GET', '/pdf/generate/12503', {responseType: "document"}, function (error, response) {
+        //     if ( error ) {
+        //       console.log( error );
+        //     } else {
+        //       console.log( response );
+        //     }
+        // })
     }
   });
 }
